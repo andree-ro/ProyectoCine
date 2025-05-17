@@ -13,11 +13,19 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000"
-}));
 app.use(express.json());
+app.use(cors({
+  origin: '*'  // Permite solicitudes de cualquier origen durante las pruebas
+}));
 
+// Middleware de depuración
+app.use((req, res, next) => {
+  console.log('Request URL:', req.originalUrl);
+  console.log('Request Method:', req.method);
+  console.log('Request Headers:', req.headers);
+  if (req.body) console.log('Request Body:', req.body);
+  next();
+});
 
 // Ruta de prueba
 app.get('/', (req, res) => {
