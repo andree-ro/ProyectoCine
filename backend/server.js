@@ -14,18 +14,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-  origin: '*'  // Permite solicitudes de cualquier origen durante las pruebas
-}));
-
-// Middleware de depuración
-app.use((req, res, next) => {
-  console.log('Request URL:', req.originalUrl);
-  console.log('Request Method:', req.method);
-  console.log('Request Headers:', req.headers);
-  if (req.body) console.log('Request Body:', req.body);
-  next();
-});
+app.use(cors());
 
 // Ruta de prueba
 app.get('/', (req, res) => {
